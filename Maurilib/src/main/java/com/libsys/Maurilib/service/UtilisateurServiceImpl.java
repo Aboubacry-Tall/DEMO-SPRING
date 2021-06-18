@@ -48,13 +48,13 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	}
 
 	@Override
-	public Utilisateur validateEmail(String email) {
+	public Utilisateur findByEmail(String email) {
 		
 		return userRepository.findByEmail(email);
 	}
 
 	@Override
-	public Utilisateur validateEmailAndPassword(String email, String password) {
+	public Utilisateur findByEmailAndPassword(String email, String password) {
 		return userRepository.findByEmailAndCode(email, password);
 	}
 	

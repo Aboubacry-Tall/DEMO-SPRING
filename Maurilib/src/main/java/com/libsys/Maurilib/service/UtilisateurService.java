@@ -10,6 +10,6 @@ public interface UtilisateurService {
 	Utilisateur addUser(Utilisateur user);
 	Utilisateur getUtilisateurById(long id);
 	void SupprimerUtilisateurById(long id);
-	Utilisateur validateEmail(String email);
-	Utilisateur validateEmailAndPassword(String email,String password);
+	Utilisateur findByEmail(String email);
+	Utilisateur findByEmailAndPassword(String email,String password);
 }

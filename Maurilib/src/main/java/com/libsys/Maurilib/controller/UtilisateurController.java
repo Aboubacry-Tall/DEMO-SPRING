@@ -29,12 +29,12 @@ public class UtilisateurController {
 		
 		return userService.getAllUtilisateur();
 	}
-	
+	//ajout du utilisateur
 	@PostMapping("/user")
 	public Utilisateur addUser(@RequestBody Utilisateur user) throws Exception{
 		String tempEmail = user.getEmail();
 		if(tempEmail !=null && !"".equals(tempEmail)) {
-			Utilisateur tempuser = userService.validateEmail(tempEmail);
+			Utilisateur tempuser = userService.findByEmail(tempEmail);
 			if(tempuser !=null) {
 				throw new  Exception("L'utilisateur "+tempEmail+" existe deja");
 			}
@@ -42,7 +42,7 @@ public class UtilisateurController {
 		user.setStatut("Active");
 		return userService.addUser(user);
 	}
-	
+	//connexion
 	@PostMapping("/login")
 	public Utilisateur Connexion(@RequestBody Utilisateur user) throws Exception {
 
@@ -57,7 +57,7 @@ public class UtilisateurController {
         	return utilisateur;
         }
         if(tempEmail !=null && mdp !=null) {
-        	tempUser=userService.validateEmailAndPassword(tempEmail,mdp);
+        	tempUser=userService.findByEmailAndPassword(tempEmail,mdp);
         }
     	if(tempUser==null) {
     		throw new Exception("Email ou mot de passe incorrect");
@@ -65,6 +65,7 @@ public class UtilisateurController {
        
         return tempUser;
         }
+	//chercher un utilisateur par id
 	@GetMapping("/find/{id}")
 	public ResponseEntity<Utilisateur> getUser(@PathVariable long id) throws Exception {
 		
@@ -75,7 +76,7 @@ public class UtilisateurController {
 			 throw new Exception("l'utilisateur n'existe pas");
 		}	
 	}
-	
+	//modifier un utilisateur
 	@PutMapping("/user/{id}")
 	public ResponseEntity<Utilisateur> updateUser(@PathVariable long id,@RequestBody Utilisateur userdetail) throws Exception{
 		Utilisateur user =userService.getUtilisateurById(id);
@@ -94,6 +95,7 @@ public class UtilisateurController {
 			 throw new Exception("l'utilisateur n'existe pas");
 		}
 	}	
+	//activer utilisateur
 	@PutMapping("/active/{id}")
 	public ResponseEntity<Utilisateur> Activer(@PathVariable long id) throws Exception{
 		Utilisateur user =userService.getUtilisateurById(id);
@@ -106,6 +108,7 @@ public class UtilisateurController {
 			 throw new Exception("l'utilisateur n'existe pas");
 		}
 	}	
+	//suspendre un utilisateur
 	@PutMapping("/suspendre/{id}")
 	public ResponseEntity<Utilisateur> Suspendre(@PathVariable long id) throws Exception{
 		Utilisateur user =userService.getUtilisateurById(id);
