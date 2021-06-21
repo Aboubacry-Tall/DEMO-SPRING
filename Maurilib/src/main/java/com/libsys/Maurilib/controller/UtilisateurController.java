@@ -29,12 +29,15 @@ public class UtilisateurController {
 		
 		return userService.getAllUtilisateur();
 	}
+	
 	//ajout du utilisateur
 	@PostMapping("/user")
 	public Utilisateur addUser(@RequestBody Utilisateur user) throws Exception{
+		
 		String tempEmail = user.getEmail();
 		if(tempEmail !=null && !"".equals(tempEmail)) {
 			Utilisateur tempuser = userService.findByEmail(tempEmail);
+			
 			if(tempuser !=null) {
 				throw new  Exception("L'utilisateur "+tempEmail+" existe deja");
 			}
@@ -42,6 +45,7 @@ public class UtilisateurController {
 		user.setStatut("Active");
 		return userService.addUser(user);
 	}
+	
 	//connexion
 	@PostMapping("/login")
 	public Utilisateur Connexion(@RequestBody Utilisateur user) throws Exception {
@@ -49,6 +53,7 @@ public class UtilisateurController {
         String tempEmail= user.getEmail();
         String mdp = user.getCode();
         Utilisateur tempUser = null;
+        
         if("admin@gmail.com".equals(tempEmail) && "1234".equals(mdp)) {
         	Utilisateur utilisateur=new Utilisateur();
         	utilisateur.setEmail(tempEmail);
@@ -56,15 +61,18 @@ public class UtilisateurController {
         	utilisateur.setStatut("Active");
         	return utilisateur;
         }
+        
         if(tempEmail !=null && mdp !=null) {
         	tempUser=userService.findByEmailAndPassword(tempEmail,mdp);
         }
+        
     	if(tempUser==null) {
     		throw new Exception("Email ou mot de passe incorrect");
     	}
        
         return tempUser;
         }
+	
 	//chercher un utilisateur par id
 	@GetMapping("/find/{id}")
 	public ResponseEntity<Utilisateur> getUser(@PathVariable long id) throws Exception {
@@ -76,28 +84,34 @@ public class UtilisateurController {
 			 throw new Exception("l'utilisateur n'existe pas");
 		}	
 	}
+	
 	//modifier un utilisateur
 	@PutMapping("/user/{id}")
 	public ResponseEntity<Utilisateur> updateUser(@PathVariable long id,@RequestBody Utilisateur userdetail) throws Exception{
+		
 		Utilisateur user =userService.getUtilisateurById(id);
 		if(user!=null) {
+			
 			if(userdetail.getCode() != null) {
 				user.setCode(userdetail.getCode());
 			}
+			
 			user.setNom(userdetail.getNom());
 			user.setEmail(userdetail.getEmail());
 			user.setTelephone(userdetail.getTelephone());
 			user.setDomicile(userdetail.getDomicile());
-			
 			Utilisateur userUpdated =userService.addUser(user);
+			
 			return ResponseEntity.ok(userUpdated);
 		}else{
 			 throw new Exception("l'utilisateur n'existe pas");
 		}
 	}	
+	
 	//activer utilisateur
 	@PutMapping("/active/{id}")
 	public ResponseEntity<Utilisateur> Activer(@PathVariable long id) throws Exception{
+		
 		Utilisateur user =userService.getUtilisateurById(id);
 		if(user!=null) {
 			user.setStatut("Active");
@@ -108,9 +122,11 @@ public class UtilisateurController {
 			 throw new Exception("l'utilisateur n'existe pas");
 		}
 	}	
+	
 	//suspendre un utilisateur
 	@PutMapping("/suspendre/{id}")
 	public ResponseEntity<Utilisateur> Suspendre(@PathVariable long id) throws Exception{
+		
 		Utilisateur user =userService.getUtilisateurById(id);
 		if(user!=null) {
 			user.setStatut("Suspendu");
