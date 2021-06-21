@@ -12,6 +12,8 @@ public interface LivreReposetory extends JpaRepository<Livre,Long> {
     @Query(value = "SELECT * FROM livres WHERE titre LIKE %?1% Or categorie LIKE %?1% ",nativeQuery = true)
     List<Livre> getSearchedLivreBD(String cle);
 
+    //
+
     @Query(value = "SELECT * FROM livres WHERE categorie = ?1 ",nativeQuery = true)
     List<Livre> getSearchedLivreCategorie(String categorie);
 }

@@ -56,6 +56,14 @@ public class LivreController {
         return livres;
     }
 
+    @GetMapping("/livres/Recherches/{key}")
+    public List<Livre> searchedLivre(@PathVariable("key") String key)
+    {
+        List<Livre> livres = livrerepo.getSearchedLivreBD(key);
+
+        return livres;
+    }
+
     @PutMapping("/livres/{id}")
     public ResponseEntity<Livre> updateLivre(@PathVariable Long id,@RequestBody Livre livre0){
 
