@@ -125,8 +125,8 @@ public class LivreController {
 
     private void fileuploader(String type ,MultipartFile file) {
 
-        String path = "C:\\Users\\Ahmedou Vall\\Desktop\\ANGULAR\\test\\front-end\\src\\assets\\";
-        String path0 ="C:\\Users\\Ahmedou Vall\\Desktop\\ANGULAR\\test\\crud-app-front\\DEMO-ANGULAR\\crud-app\\src\\assets";
+
+        String path0 ="C:\\Users\\Cheikh\\Desktop\\Projet-Angular\\DEMO-ANGULAR\\crud-app\\src\\assets";
         try {
             file.transferTo(new File(path0+"\\"+type+"\\"+file.getOriginalFilename()));
             System.out.println("transfert okkkk");
