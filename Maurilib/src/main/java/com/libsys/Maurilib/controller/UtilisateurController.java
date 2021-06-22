@@ -18,7 +18,7 @@ import com.libsys.Maurilib.service.UtilisateurService;
 
 @CrossOrigin(origins = "http://localhost:4200",maxAge=3600)
 @RestController
-@RequestMapping("/lib")
+@RequestMapping("/lib/")
 public class UtilisateurController {
 	 
 	@Autowired
