@@ -85,6 +85,13 @@ public class UtilisateurController {
 		}	
 	}
 	
+	//chercher un utilisateur par nom ou email ou telephoen
+	@GetMapping("/findUser/{cle}")
+	public List<Utilisateur> chercherUser(@PathVariable String cle) {
+		
+		return userService.findUser(cle);
+	}
+	
 	//modifier un utilisateur
 	@PutMapping("/user/{id}")
 	public ResponseEntity<Utilisateur> updateUser(@PathVariable long id,@RequestBody Utilisateur userdetail) throws Exception{

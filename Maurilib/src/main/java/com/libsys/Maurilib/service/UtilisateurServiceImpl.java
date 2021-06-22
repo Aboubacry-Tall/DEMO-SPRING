@@ -17,7 +17,7 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 
 	@Override
 	public List<Utilisateur> getAllUtilisateur() {
-		
+
 		return userRepository.findAll();
 	}
 
@@ -56,6 +56,11 @@ public class UtilisateurServiceImpl implements UtilisateurService{
 	@Override
 	public Utilisateur findByEmailAndPassword(String email, String password) {
 		return userRepository.findByEmailAndCode(email, password);
+	}
+
+	@Override
+	public List<Utilisateur> findUser(String cle) {
+		return this.userRepository.findUser(cle);
 	}
 	
 	

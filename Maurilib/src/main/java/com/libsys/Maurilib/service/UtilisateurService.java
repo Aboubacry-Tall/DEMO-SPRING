@@ -12,4 +12,5 @@ public interface UtilisateurService {
 	void SupprimerUtilisateurById(long id);
 	Utilisateur findByEmail(String email);
 	Utilisateur findByEmailAndPassword(String email,String password);
+	List<Utilisateur> findUser(String cle);
 }
