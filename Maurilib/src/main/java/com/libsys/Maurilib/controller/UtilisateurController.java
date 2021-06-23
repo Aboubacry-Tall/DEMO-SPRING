@@ -45,9 +45,31 @@ public class UtilisateurController {
 		user.setStatut("Active");
 		return userService.addUser(user);
 	}
+	@PostMapping("/login")
+	public boolean Login(@RequestBody Utilisateur user) {
+
+        String tempEmail= user.getEmail();
+        String mdp = user.getCode();
+        Utilisateur tempUser = null;
+        
+        if("admin@gmail.com".equals(tempEmail) && "1234".equals(mdp)) {
+
+        	return true;
+        }
+        
+        if(tempEmail !=null && mdp !=null) {
+        	tempUser=userService.findByEmailAndPassword(tempEmail,mdp);
+	    	if(tempUser==null) {
+	    		return false;
+	    	}else return true;
+        }
+		return false;
+        
+     }
+	
 	
 	//connexion
-	@PostMapping("/login")
+	@PostMapping("/connexion")
 	public Utilisateur Connexion(@RequestBody Utilisateur user) throws Exception {
 
         String tempEmail= user.getEmail();
