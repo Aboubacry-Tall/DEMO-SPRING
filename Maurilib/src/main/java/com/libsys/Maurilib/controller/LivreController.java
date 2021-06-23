@@ -29,8 +29,6 @@ public class LivreController {
     @Autowired
     private LivreReposetory livrerepo ;
 
-    @Autowired
-    ServletContext context;
 
     String Home = System.getProperty("user.dir");
     Path path = Paths.get(Home).getParent().getParent();
