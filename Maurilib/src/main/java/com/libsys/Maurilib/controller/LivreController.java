@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +31,9 @@ public class LivreController {
 
     @Autowired
     ServletContext context;
+
+    String Home = System.getProperty("user.dir");
+    Path path = Paths.get(Home).getParent().getParent();
 
 
     @GetMapping("/livres")
@@ -124,14 +129,15 @@ public class LivreController {
     private void fileuploader(String type ,MultipartFile file) {
 
 
-        String path ="C:\\Users\\Ahmedou Vall\\Desktop\\ANGULAR\\test\\DEMO-ANGULAR\\crud-app\\src\\assets";
-        File dossier=new File(path+"\\"+type);
-        boolean isExist = dossier.exists() && dossier.isDirectory();
+        String directoryPath = path.toString()+"\\DEMO-ANGULAR\\crud-app\\src\\assets";
+        File directory=new File(directoryPath+"\\"+type);
+
+        boolean isExist = directory.exists() && directory.isDirectory();
         if(!isExist){
-            dossier.mkdir();
+            directory.mkdir();
         }
         try {
-            file.transferTo(new File(path+"\\"+type+"\\"+file.getOriginalFilename()));
+            file.transferTo(new File(directoryPath+"\\"+type+"\\"+file.getOriginalFilename()));
             System.out.println("transfert okkkk");
         } catch (IllegalStateException e) {
             // TODO Auto-generated catch block
