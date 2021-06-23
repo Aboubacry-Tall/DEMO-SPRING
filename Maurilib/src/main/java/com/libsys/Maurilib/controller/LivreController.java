@@ -56,8 +56,8 @@ public class LivreController {
         return livres;
     }
 
-    @GetMapping("/livres/Recherches/{key}")
-    public List<Livre> searchedLivre(@PathVariable("key") String key)
+    @GetMapping("/livres/Recherches/")
+    public List<Livre> searchedLivre(@RequestParam("key") String key)
     {
         List<Livre> livres = livrerepo.getSearchedLivreBD(key);
 
@@ -108,8 +108,6 @@ public class LivreController {
         this.fileuploader("img",fileImg);
         this.fileuploader("doc",fileDoc);
 
-        //String newFileName = FilenameUtils.getBaseName(filename)+"."+FilenameUtils.getExtension(filename);
-        //File serverFile = new File (context.getRealPath("/Images/"+File.separator+newFileName));
 
         Livre savedLivre = livrerepo.save(livre0);
 
@@ -126,9 +124,14 @@ public class LivreController {
     private void fileuploader(String type ,MultipartFile file) {
 
 
-        String path0 ="C:\\Users\\Cheikh\\Desktop\\Projet-Angular\\DEMO-ANGULAR\\crud-app\\src\\assets";
+        String path ="C:\\Users\\Ahmedou Vall\\Desktop\\ANGULAR\\test\\DEMO-ANGULAR\\crud-app\\src\\assets";
+        File dossier=new File(path+"\\"+type);
+        boolean isExist = dossier.exists() && dossier.isDirectory();
+        if(!isExist){
+            dossier.mkdir();
+        }
         try {
-            file.transferTo(new File(path0+"\\"+type+"\\"+file.getOriginalFilename()));
+            file.transferTo(new File(path+"\\"+type+"\\"+file.getOriginalFilename()));
             System.out.println("transfert okkkk");
         } catch (IllegalStateException e) {
             // TODO Auto-generated catch block
