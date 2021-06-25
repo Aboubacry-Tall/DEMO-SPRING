@@ -22,13 +22,11 @@ public class BuyController {
 	
 	@PostMapping("/buy")
 	public void buy(@RequestBody Buy buy) {
-		System.out.println("Post" + buy.getLivreId());
 		buyRepo.save(buy);
 	}
 	
 	@GetMapping("/buys")
 	public List<Buy> buys() {
-		System.out.println("Get");
 		return buyRepo.findAll();
 	}
 }
