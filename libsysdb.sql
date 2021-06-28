@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2021 at 01:31 PM
+-- Generation Time: Jun 28, 2021 at 11:08 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -35,6 +35,26 @@ CREATE TABLE `adresse` (
   `domicile` varchar(255) DEFAULT NULL,
   `utilisateurs_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buy`
+--
+
+CREATE TABLE `buy` (
+  `id` bigint(20) NOT NULL,
+  `livre_id` varchar(255) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `buy`
+--
+
+INSERT INTO `buy` (`id`, `livre_id`, `user_id`) VALUES
+(1, '25', '2'),
+(2, '23', '2');
 
 -- --------------------------------------------------------
 
@@ -112,10 +132,10 @@ CREATE TABLE `livres` (
 --
 
 INSERT INTO `livres` (`id`, `titre`, `prix`, `statut`, `etat`, `isbn`, `couverture`, `categorie`, `auteur`, `editeur`, `document`, `dates`, `resume`) VALUES
-(8, 'Les Essentiels du Piratage Informatique', '15000', NULL, NULL, '9781071500026', 'les-essentiels-du-piratage-informatique.jpg', 'informatique', 'Adidas Wilson', 'Alpha', '00-Introduction.pdf', NULL, ''),
-(10, 'Père riche père pauvre édition 20e anniversaire', '25000', NULL, NULL, '9782924973325', 'intelligence-artificielle-5.jpg', 'PNL', 'Robert t Kiyosaki', 'Groupe ADP', 'Conversation sur les mathématiques.pdf', NULL, ''),
-(20, 'haking', '2500', NULL, NULL, '1654894654', 'hacking-et-contre-hacking.jpg', 'informatique', 'cheikh', 'Aboubacry', 'Hacking et contre hacking.pdf', NULL, 'une introduction generale su le haking'),
-(21, 'flifigjvi;o', '33', NULL, NULL, '5465463456', 'windows 10 2004 img.PNG', 'informatique', 'cheikh', 'thico', 'LIBSYS0.docx', NULL, 'fgdf');
+(23, 'Intelligence artificielle', '1', 'gratuit', NULL, '22545526', 'intelligence-artificielle-5.jpg', 'Jeux', 'activision', 'sledghammer', 'Intelligence artificielle.pdf', '2021-06-10', 'c fatiguant'),
+(25, 'soniic', '1', 'payant', NULL, '5584445655', 'la-mathematique-du-physicien.jpg', 'Jeux', 'dony', 'sny', 'La Mathématique du physicien.pdf', '2021-06-09', ''),
+(26, 'hacking', '255', 'payant', NULL, '5555555555', 'hacking-et-contre-hacking.jpg', 'Informatiques', 'Microsoft', 'google', 'Hacking et contre hacking.pdf', '2021-06-24', 'une introduction importante pour le premier pas en hacking'),
+(27, 'Mathematiques', '0', 'gratuit', NULL, '55875462466', 'mathematiques-en-economie-gestion-2.jpg', 'Educations', 'UNA', 'cheikh', 'La Mathématique du physicien.pdf', '2021-06-09', '');
 
 -- --------------------------------------------------------
 
@@ -166,12 +186,13 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `email`, `code`, `cle`, `statut`, `telephone`, `fixe`, `domicile`) VALUES
-(1, 'tito', 'toto@gmail.com', '12345', 'client', 'Active', '27278474', NULL, 'basra'),
-(2, 'cheikh', 'cheikh@yahoo.fr', '1234', 'client', 'Active', '49701013', NULL, 'toujinine'),
+(1, 'tall', 'tall@gmail.com', '1234', 'client', 'Active', '27278474', NULL, 'basra'),
+(2, 'cheikh raby', 'cheikh@yahoo.fr', '1', 'client', 'Active', '49701013', NULL, 'toujinine'),
 (3, 'cisse', 'cisse@gmail.com', '1234', 'client', 'Active', '42465158', NULL, 'socogime'),
-(52, 'oum kelthome', 'kelthome@gmail.com', '1234', 'client', 'Active', '45287663', NULL, 'unknown'),
-(53, 'Fatis', 'cheikh22@yahoo.fr', '1234', 'client', 'Active', '49701013', NULL, 'basra'),
-(54, 'cheikh', 'cheikh11@yahoo.fr', '1234', 'client', 'Active', '49701013', NULL, 'basra');
+(55, 'asma mohamed chaddi', 'asma@gmail.com', '1234', 'client', 'Active', '44482009', NULL, 'madrid'),
+(59, 'Fatis', 'fatis@gmail.com', '1234', 'client', 'Active', '49701013', NULL, 'arafate'),
+(60, 'Mostafa', 'Mostafa@gmail.com', '1234', 'client', 'Active', '225548565', NULL, 'nktt'),
+(61, 'med', 'cheikh24@yahoo.fr', '1234', 'client', 'Active', '45585852', NULL, 'basra');
 
 --
 -- Indexes for dumped tables
@@ -181,6 +202,12 @@ INSERT INTO `utilisateurs` (`id`, `nom`, `email`, `code`, `cle`, `statut`, `tele
 -- Indexes for table `adresse`
 --
 ALTER TABLE `adresse`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `buy`
+--
+ALTER TABLE `buy`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -218,16 +245,22 @@ ALTER TABLE `utilisateurs`
 --
 
 --
+-- AUTO_INCREMENT for table `buy`
+--
+ALTER TABLE `buy`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `livres`
 --
 ALTER TABLE `livres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
